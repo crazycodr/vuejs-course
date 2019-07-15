@@ -1,0 +1,54 @@
+[
+    {
+        "avatar": "/assets/avatar/kimbassinger.jpg",
+        "firstname": "Kim",
+        "lastname": "Bassinger",
+        "dateOfBirth": "1953-12-08",
+        "movies": [
+            {
+                "name": "Marvel"
+            },
+            {
+                "name": "Harry Potter"
+            },
+            {
+                "name": "Die Hard"
+            }
+        ],
+        "artists": [
+            {
+                "name": "Nightwish"
+            },
+            {
+                "name": "Stratovarius"
+            },
+            {
+                "name": "Metallica"
+            }
+        ],
+        "foods": [
+            {
+                "type": "Thaï"
+            },
+            {
+                "type": "Mexican"
+            },
+            {
+                "type": "American"
+            }
+        ]
+    },
+    {
+        "avatar": "/assets/avatar/abraham.jpg",
+        "firstname": "Abraham",
+        "lastname": "Lincoln",
+        "dateOfBirth": "1809-02-12",
+        "movies": [],
+        "artists": [],
+        "foods": [
+            {
+                "type": "American"
+            }
+        ]
+    }
+]
