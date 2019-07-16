@@ -1,24 +1,57 @@
 <template>
     <div id="app">
-        <h1>Profiles</h1>
+        <div class="header">
+            <div class="search-form">
+                <input v-model="filter" placeholder="Filter profiles by typing here" />
+                <button @click="showAddProfile">Add profile</button>
+            </div>
+            <h1>Profiles</h1>
+        </div>
+        <AddProfile class="add-profile" v-if="addingProfile" @saveProfile="saveProfile" @cancelProfile="hideAddProfile" />
         <transition-group name="profile-list" tag="div">
-            <ProfilePage v-for="profile in profiles" :key="profile.avatar" v-bind="profile" />
+            <ProfilePage v-for="profile in filteredProfiles" :key="profile.avatar" v-bind="profile" @deleteProfile="deleteProfile(profile)" />
         </transition-group>
     </div>
 </template>
 
 <script>
-import ProfilePage from "./components/ProfilePage.vue";
-import axios from "axios";
+import AddProfile from "./components/AddProfile"
+import ProfilePage from "./components/ProfilePage"
+import axios from "axios"
 
 export default {
     components: {
-        ProfilePage
+        ProfilePage, AddProfile
     },
     data() {
         return {
-            profiles: []
+            profiles: [],
+            filter: "",
+            addingProfile: false,
         };
+    },
+    computed: {
+        filteredProfiles(){
+            return this.profiles.filter(profile => {
+                const fullname = (profile.firstname + ' ' + profile.lastname).toLowerCase()
+                return fullname.indexOf(this.filter.toLowerCase()) != -1
+            })
+        }
+    },
+    methods: {
+        deleteProfile(deletedProfile) {
+            this.profiles = this.profiles.filter(profile => profile != deletedProfile)
+        },
+        hideAddProfile() {
+            this.addingProfile = false
+        },
+        showAddProfile() {
+            this.addingProfile = true
+        },
+        saveProfile(payload) {
+            this.profiles.push(payload)
+            this.hideAddProfile()
+        }
     },
     mounted() {
         axios.get("/assets/data/profiles.json").then(response => {
@@ -36,6 +69,23 @@ export default {
     color: #2c3e50;
     max-width: 800px;
     margin: 60px auto;
+
+    .header {
+        .search-form {
+            float: right;
+
+            input {
+                font-size: 18px;
+                width: 400px;
+                padding: 5px;
+                outline: none;
+            }
+        }
+    }
+
+    .add-profile {
+        margin-bottom: 20px;
+    }
 
     .profile-page {
         margin-bottom: 10px;

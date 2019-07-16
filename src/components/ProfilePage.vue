@@ -1,27 +1,30 @@
 <template>
     <div class="profile-page">
-
-        <div class="avatar">
-            <img class="avatar-img" :src="avatar" />
-        </div>
-        <div class="personal-data">
-            <h1>{{ firstname }} {{ lastname }}</h1>
-
-            <div class="date-of-birth">
-                {{ dateOfBirthHuman }} - {{age}} years old (
-                    <VueCountdown :time="nextBirthdayInMilliseconds">
-                        <template slot-scope="props">Next birthday: {{ props.days }} days</template>
-                    </VueCountdown>
-                )
+        <button class="delete" @click="deleteProfile">
+            Delete
+        </button>
+        <div class="profile-card">
+            <div class="avatar">
+                <img class="avatar-img" :src="avatar" />
             </div>
+            <div class="personal-data">
+                <h1>{{ firstname }} {{ lastname }}</h1>
 
-            <div class="tastes">
-                <TasteList v-if="movies.length" :maxItems="2" title="Movie tastes" :items="movies.map(a => a.name)" />
-                <TasteList v-if="artists.length" :maxItems="2" title="Musical tastes" :items="artists.map(a => a.name)" />
-                <TasteList v-if="foods.length" :maxItems="2" title="Food tastes" :sorted="false" :items="foods.map(a => a.type)" />
+                <div class="date-of-birth">
+                    {{ dateOfBirthHuman }} - {{age}} years old (
+                        <VueCountdown :interval="60 * 60 * 1000" :time="nextBirthdayInMilliseconds">
+                            <template slot-scope="props">Next birthday: {{ props.days }} days</template>
+                        </VueCountdown>
+                    )
+                </div>
+
+                <div class="tastes">
+                    <TasteList v-if="movies.length" :maxItems="2" title="Movie tastes" :items="movies.map(a => a.name)" />
+                    <TasteList v-if="artists.length" :maxItems="2" title="Musical tastes" :items="artists.map(a => a.name)" />
+                    <TasteList v-if="foods.length" :maxItems="2" title="Food tastes" :sorted="false" :items="foods.map(a => a.type)" />
+                </div>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -67,6 +70,13 @@ export default {
             }
             return moment.duration(nextBirthday.diff(now)).asMilliseconds()
         }
+    },
+    methods: {
+        deleteProfile(){
+            if (confirm('Are you sure you want to delete this profile?')) {
+                this.$emit('deleteProfile')
+            }
+        }
     }
 };
 </script>
@@ -75,39 +85,47 @@ export default {
 .profile-page {
     background-color: #f1f1f1;
     background: url('../assets/images/background.png');
-    display: flex;
     border: 3px solid #eaeaea;
     border-radius: 10px;
 
-    .avatar {
-        width: 200px;
-        height: 200px;
-
-        img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-            border-radius: 10px 0px 0px 10px;
-        }
+    button.delete {
+        float: right;
+        margin: 5px 5px 0 0;
     }
 
-    .personal-data {
-        flex-grow: 1;
-        padding: 10px 20px;
+    .profile-card {
+        display: flex;
 
-        h1 {
-            margin: 0;
+        .avatar {
+            width: 200px;
+            height: 200px;
+
+            img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                border-radius: 10px 0px 0px 10px;
+            }
         }
 
-        .date-of-birth {
-            font-style: italic;
-        }
+        .personal-data {
+            flex-grow: 1;
+            padding: 10px 20px;
 
-        .tastes {
-            display: flex;
+            h1 {
+                margin: 0;
+            }
 
-            .taste-list:not(:last-child) {
-                margin-right: 20px;
+            .date-of-birth {
+                font-style: italic;
+            }
+
+            .tastes {
+                display: flex;
+
+                .taste-list:not(:last-child) {
+                    margin-right: 20px;
+                }
             }
         }
     }
