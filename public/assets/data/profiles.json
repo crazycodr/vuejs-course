@@ -6,13 +6,22 @@
         "dateOfBirth": "1953-12-08",
         "movies": [
             {
-                "name": "Marvel"
+                "name": "8 Mile"
             },
             {
-                "name": "Harry Potter"
+                "name": "The Sentinel"
             },
             {
-                "name": "Die Hard"
+                "name": "Third Person"
+            },
+            {
+                "name": "Cellular"
+            },
+            {
+                "name": "4 Minute Mile"
+            },
+            {
+                "name": "Fifty Shades Darker"
             }
         ],
         "artists": [
@@ -32,9 +41,62 @@
             },
             {
                 "type": "Mexican"
+            }
+        ]
+    },
+    {
+        "avatar": "/assets/avatar/katyperry.jpg",
+        "firstname": "Katy",
+        "lastname": "Perry",
+        "dateOfBirth": "1984-10-25",
+        "movies": [
+            {
+                "name": "Tron"
             },
             {
-                "type": "American"
+                "name": "Tron 2"
+            }
+        ],
+        "foods": [
+            {
+                "type": "Italian"
+            },
+            {
+                "type": "Thaï"
+            }
+        ]
+    },
+    {
+        "avatar": "/assets/avatar/tomcruise.jpg",
+        "firstname": "Tom",
+        "lastname": "Cruise",
+        "dateOfBirth": "1962-07-03",
+        "movies": [
+            {
+                "name": "Mission Impossible"
+            },
+            {
+                "name": "Mission Impossible 2"
+            },
+            {
+                "name": "Mission Impossible 3"
+            },
+            {
+                "name": "Mission Impossible 4"
+            },
+            {
+                "name": "Mission Impossible 5"
+            },
+            {
+                "name": "Mission Impossible 6"
+            }
+        ],
+        "artists": [
+            {
+                "name": "Cool and the gang"
+            },
+            {
+                "name": "Rapz"
             }
         ]
     },
@@ -43,8 +105,6 @@
         "firstname": "Abraham",
         "lastname": "Lincoln",
         "dateOfBirth": "1809-02-12",
-        "movies": [],
-        "artists": [],
         "foods": [
             {
                 "type": "American"
