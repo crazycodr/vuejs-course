@@ -12,6 +12,17 @@
                     @invalid.capture.prevent="handleInvalid"
                 >
 
+                    <FormField label="Key (slug)" :errorMessage="fieldErrors.slug">
+                        <input
+                            name="slug"
+                            :class="{ hasError: this.fieldErrors.slug || false }" 
+                            type="text"
+                            required
+                            placeholder="Please paste the key/slug of the profile"
+                            v-model="slug"
+                        />
+                    </FormField>
+
                     <FormField label="Avatar" :errorMessage="fieldErrors.avatar">
                         <input
                             name="avatar"
@@ -65,8 +76,8 @@
 </template>
 
 <script>
-import NoAvatar from '../assets/images/no-avatar.png'
-import FormField from './FormField'
+import NoAvatar from './assets/images/no-avatar.png'
+import FormField from './components/FormField'
 
 export default {
     components: {
@@ -74,6 +85,7 @@ export default {
     },
     data(){
         return {
+            slug: "",
             avatar: "",
             firstname: "",
             lastname: "",
@@ -101,7 +113,8 @@ export default {
         saveProfile(){
             if (this.$refs.profileForm.checkValidity()) {
                 
-                this.$emit('saveProfile', {
+                this.$store.dispatch('addProfile', { profile: {
+                    slug: this.slug,
                     avatar: this.avatar,
                     firstname: this.firstname,
                     lastname: this.lastname,
@@ -109,14 +122,16 @@ export default {
                     movies: this.movies,
                     artists: this.artists,
                     foods: this.foods,
-                })
+                }})
+
+                this.$router.push('/' + this.slug)
 
             } else {
-                this.$refs.profileForm.reportValidity();
+                this.$refs.profileForm.reportValidity()
             }
         },
         cancelProfile(){
-            this.$emit('cancelProfile')
+            this.$router.push('/')
         },
         handleChange(event){
             this.fieldErrors = {
@@ -150,7 +165,7 @@ export default {
 <style lang="scss" scoped>
 .add-profile {
     background-color: #f1f1f1;
-    background: url('../assets/images/background.png');
+    background: url('assets/images/background.png');
     border: 3px solid #eaeaea;
     border-radius: 10px;
 

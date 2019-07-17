@@ -1,5 +1,6 @@
 [
     {
+        "slug": "kim-bassigner",
         "avatar": "/assets/avatar/kimbassinger.jpg",
         "firstname": "Kim",
         "lastname": "Bassinger",
@@ -45,6 +46,7 @@
         ]
     },
     {
+        "slug": "katy-perry",
         "avatar": "/assets/avatar/katyperry.jpg",
         "firstname": "Katy",
         "lastname": "Perry",
@@ -67,6 +69,7 @@
         ]
     },
     {
+        "slug": "tom-cruise",
         "avatar": "/assets/avatar/tomcruise.jpg",
         "firstname": "Tom",
         "lastname": "Cruise",
@@ -101,6 +104,7 @@
         ]
     },
     {
+        "slug": "abraham-lincoln",
         "avatar": "/assets/avatar/abraham.jpg",
         "firstname": "Abraham",
         "lastname": "Lincoln",

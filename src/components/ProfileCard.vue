@@ -1,14 +1,14 @@
 <template>
-    <div class="profile-page">
+    <div class="profile-card">
         <button class="delete" @click="deleteProfile">
             Delete
         </button>
-        <div class="profile-card">
+        <div class="card-content">
             <div class="avatar">
                 <img class="avatar-img" :src="avatar" />
             </div>
             <div class="personal-data">
-                <h1>{{ firstname }} {{ lastname }}</h1>
+                <h1><router-link :to="{name: 'profile', params: {id: slug}}">{{ firstname }} {{ lastname }}</router-link></h1>
 
                 <div class="date-of-birth">
                     {{ dateOfBirthHuman }} - {{age}} years old (
@@ -38,6 +38,7 @@ export default {
         TasteList, VueCountdown
     },
     props: {
+        slug: String,
         avatar: String,
         firstname: String,
         lastname: String,
@@ -82,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-page {
+.profile-card {
     background-color: #f1f1f1;
     background: url('../assets/images/background.png');
     border: 3px solid #eaeaea;
@@ -93,7 +94,7 @@ export default {
         margin: 5px 5px 0 0;
     }
 
-    .profile-card {
+    .card-content {
         display: flex;
 
         .avatar {
