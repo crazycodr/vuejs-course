@@ -17,7 +17,6 @@
 <script>
 import AddProfile from "./components/AddProfile"
 import ProfilePage from "./components/ProfilePage"
-import axios from "axios"
 
 export default {
     components: {
@@ -25,14 +24,13 @@ export default {
     },
     data() {
         return {
-            profiles: [],
             filter: "",
             addingProfile: false,
         };
     },
     computed: {
         filteredProfiles(){
-            return this.profiles.filter(profile => {
+            return this.$store.state.profiles.filter(profile => {
                 const fullname = (profile.firstname + ' ' + profile.lastname).toLowerCase()
                 return fullname.indexOf(this.filter.toLowerCase()) != -1
             })
@@ -40,7 +38,7 @@ export default {
     },
     methods: {
         deleteProfile(deletedProfile) {
-            this.profiles = this.profiles.filter(profile => profile != deletedProfile)
+            this.$store.commit('removeProfile', deletedProfile)
         },
         hideAddProfile() {
             this.addingProfile = false
@@ -49,14 +47,12 @@ export default {
             this.addingProfile = true
         },
         saveProfile(payload) {
-            this.profiles.push(payload)
+            this.$store.commit('addProfile', { profile: payload })
             this.hideAddProfile()
         }
     },
     mounted() {
-        axios.get("/assets/data/profiles.json").then(response => {
-            this.profiles = response.data;
-        });
+        this.$store.dispatch('loadProfiles')
     }
 };
 </script>
